@@ -71,15 +71,23 @@ function DirectedScatterPlot(data) {
 
 DirectedScatterPlot.prototype.update = function (data) {
 
-    var chart = this;
-    var full = data.slice();
+  var chart = this;
+  var full = data.slice();
 
-    chart.g.selectAll(".circ")
-      .data(full, function(d){ return d.year }).enter()
-      .append("circle")
-      .attr("class", "circ")
-      .attr("cx", function(d){ return chart.xScale(d.fam_child_pov) })
-      .attr("cy", function(d){ return chart.yScale(d.tanf_fam) })
-      .attr("r", 8);
+  chart.g.selectAll(".circ")
+    .data(full, function(d){ return d.year }).enter()
+    .append("circle")
+    .attr("class", "circ")
+    .attr("cx", function(d){ return chart.xScale(d.fam_child_pov) })
+    .attr("cy", function(d){ return chart.yScale(d.tanf_fam) })
+    .attr("r", 8);
+
+  chart.g.selectAll(".year_note")
+    .data(full).enter()
+    .append("text")
+    .attr("class", "year_note")
+    .attr("x", function(d){ return chart.xScale(d.fam_child_pov) })
+    .attr("y", function(d){ return chart.yScale(d.tanf_fam) })
+    .text(function(d){ return d.year });
 
 };  
