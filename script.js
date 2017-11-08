@@ -100,7 +100,7 @@ DirectedScatterPlot.prototype.update = function (data) {
   // Append a new path to the svg, using .datum() since we are binding 
   // all of our data to one new path element. We also pass the line  
   // variable to the "d" attribute. 
-  chart.svg.append("path")
+  chart.g.append("path")
     .datum(full)
     .attr("class", "line")
     .attr("d", line)

@@ -34,3 +34,24 @@ li {
     margin: 0 0 .5em;
     color: #666;
 }
+
+
+.circ { 
+    stroke-width: 0;
+    fill: #1696d2;
+    opacity: 0.6;
+    stroke-linecap: round;
+ }
+
+.line {
+  stroke: black;
+  stroke-width: 3;
+  fill: none;
+    opacity: 0.7;
+    stroke-linecap: round;
+}
+.year_note {
+    font: Lato;
+    font-size: 12px;
+    fill: #5c5859;
+}
