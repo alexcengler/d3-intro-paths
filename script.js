@@ -80,7 +80,9 @@ DirectedScatterPlot.prototype.update = function (data) {
     .attr("class", "circ")
     .attr("cx", function(d){ return chart.xScale(d.fam_child_pov) })
     .attr("cy", function(d){ return chart.yScale(d.tanf_fam) })
-    .attr("r", 8);
+    .transition()
+      .duration(2000)
+      .attr("r", 8);
 
   chart.g.selectAll(".year_note")
     .data(full).enter()
@@ -88,14 +90,19 @@ DirectedScatterPlot.prototype.update = function (data) {
     .attr("class", "year_note")
     .attr("x", function(d){ return chart.xScale(d.fam_child_pov) })
     .attr("y", function(d){ return chart.yScale(d.tanf_fam) })
-    .text(function(d){ return d.year });
-
+    .text(function(d){ return d.year })
+    .attr("opacity",0)
+    .transition()
+      .duration(2000)
+      .attr("opacity",1);
 
   // Use d3.line to create a line function that we will use to pass 
   // data to our our path's d attribute
   var line = d3.line()
     .x(function(d) { return chart.xScale(d.fam_child_pov); })
-    .y(function(d) { return chart.yScale(d.tanf_fam); });
+    .y(function(d) { return chart.yScale(d.tanf_fam); })
+    .curve(d3.curveCatmullRom.alpha(0.7));
+
 
   // Append a new path to the svg, using .datum() since we are binding 
   // all of our data to one new path element. We also pass the line  
@@ -104,6 +111,11 @@ DirectedScatterPlot.prototype.update = function (data) {
     .datum(full)
     .attr("class", "line")
     .attr("d", line)
+    .style("opacity",0)
+    .transition()
+      .delay(1000)
+      .duration(1000)
+      .style("opacity", 1);
 
   // Add Axis Labels
   chart.g
