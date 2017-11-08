@@ -11,7 +11,7 @@ var margin = {
 var width = 625 - margin.left - margin.right;
 var height = 625 - margin.top - margin.bottom;
 
-
+// 
 d3.queue()
   .defer(d3.json, 'data/fam-w-children-tanf-ratio.json')
   .defer(d3.json, 'data/state_tanf_to_poverty_ratio.json')
@@ -26,7 +26,37 @@ d3.queue()
 
 function DirectedScatterPlot(data) {
 
-  console.log(data);
+  var chart = this;
+
+  chart.svg = d3.select("#chart1")
+    .append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+
+  chart.g = d3.select("svg")
+    .append("g")
+    .attr("transform", function(){ return "translate(" + margin.left + "," + margin.top + ")" });
+
+  chart.xScale = d3.scaleLinear()
+    .domain([4500000,7500000])
+    .range([0, width])
+    .nice();
+
+  chart.yScale = d3.scaleLinear()
+      .domain([1500000, 4500000])
+    .range([height, 0]);
+
+  chart.xAxis = d3.axisBottom(chart.xScale).ticks(5, "s");
+  chart.yAxis = d3.axisLeft(chart.yScale).ticks(5, "s");
+
+  chart.g.append("g")
+    .attr("transform", function(){ return "translate(0," + height + ")" })
+    .attr("class", "axis")
+    .call(chart.xAxis);
+
+  chart.g.append("g")
+    .attr("class", "axis")
+    .call(chart.yAxis);
 
 };
 
