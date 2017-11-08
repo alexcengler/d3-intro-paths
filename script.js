@@ -105,4 +105,23 @@ DirectedScatterPlot.prototype.update = function (data) {
     .attr("class", "line")
     .attr("d", line)
 
+  // Add Axis Labels
+  chart.g
+    .append("text")
+    .attr("class", "yAxisLabel")
+    .attr("transform", "rotate(-90)")
+    .attr("x", -(height / 2))
+    .attr("y", -(margin.left * 0.75))
+    .style("text-anchor", "middle")
+    .html("Families with Children on TANF");
+
+  chart.g
+    .append("text")
+    .attr("class", "xAxisLabel")
+    .attr("x", width / 2)
+    .attr("y", height + margin.bottom * 0.75)
+    .style("text-anchor", "middle")
+    .html("Impoverished Families with Children");
+
+
 };  
