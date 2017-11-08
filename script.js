@@ -74,6 +74,11 @@ DirectedScatterPlot.prototype.update = function (data) {
   var chart = this;
   var full = data.slice();
 
+  // remove existing circles, year labels, and paths using css selectors
+  chart.g.selectAll(".circ").remove();
+  chart.g.selectAll(".year_note").remove();
+  chart.g.selectAll(".line").remove();
+
   chart.g.selectAll(".circ")
     .data(full, function(d){ return d.year }).enter()
     .append("circle")
